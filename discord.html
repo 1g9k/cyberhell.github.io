@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Check Discord Username Availability</title>
+    <style>
+        body {
+            background-image: url('https://c4.wallpaperflare.com/wallpaper/749/308/1001/anime-code-wallpaper-preview.jpg');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+        #container {
+            margin: 10% auto;
+            width: 50%;
+        }
+        #checkForm {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+    <script>
+        function checkUsername() {
+            var username = document.getElementById('username').value;
+            var xhr = new XMLHttpRequest();
+            var url = 'discord.php'; // Replace with correct path if needed
+
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var response = xhr.responseText;
+                        alert(response); // Display the response in an alert
+                    } else {
+                        alert('Failed to retrieve a response from the server');
+                    }
+                }
+            };
+            xhr.send('username=' + encodeURIComponent(username));
+        }
+    </script>
+</head>
+<body>
+    <div id="container">
+        <form id="checkForm">
+            <label for="username">Enter Discord Username:</label>
+            <input type="text" id="username" required>
+            <br>
+            <button type="button" onclick="checkUsername()">Check</button>
+        </form>
+    </div>
+</body>
+</html>
